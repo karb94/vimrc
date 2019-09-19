@@ -44,6 +44,10 @@ call plug#end()
 
 "Sneak
 let g:sneak#label = 1
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 "Fuzzy Finder (FZF)
 nnoremap <leader>b :Buffers<CR>
@@ -75,7 +79,6 @@ hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
 highlight LineNr ctermfg=Yellow
 highlight CursorLineNr ctermfg=Yellow
 highlight Normal ctermfg=White
-highlight Cursor ctermfg=Blue
 
 "Status bar
 set laststatus=2
