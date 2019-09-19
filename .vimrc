@@ -4,9 +4,9 @@ syntax on
 syntax enable
 
 "Settings
-let &t_SI.="\e[5 q"             "Change cursor shape in insert mode
+let &t_SI.="\e[6 q"             "Change cursor shape in insert mode
 let &t_SR.="\e[4 q"             "Change cursor shape in replace mode
-let &t_EI.="\e[1 q"             "Change cursor shape in normal mode
+let &t_EI.="\e[2 q"             "Change cursor shape in normal mode
 set nohlsearch                  "no highlights during search
 set number relativenumber       "set relative number on
 set incsearch                   "starts searching while you type
@@ -53,8 +53,7 @@ map T <Plug>Sneak_T
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History:<CR>
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>l :Lines<CR>
-nnoremap <leader>L :Lines<CR>
+nnoremap <leader>/ :Lines<CR>
 
 "Mappings
 inoremap lk <Esc>
