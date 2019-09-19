@@ -4,11 +4,9 @@ syntax on
 syntax enable
 
 "Settings
-highlight Normal ctermfg=White
-highlight Cursor ctermfg=Blue
-let &t_SI.="\e[5 q"
-let &t_SR.="\e[4 q"
-let &t_EI.="\e[1 q"
+let &t_SI.="\e[5 q"             "Change cursor shape in insert mode
+let &t_SR.="\e[4 q"             "Change cursor shape in replace mode
+let &t_EI.="\e[1 q"             "Change cursor shape in normal mode
 set nohlsearch                  "no highlights during search
 set number relativenumber       "set relative number on
 set incsearch                   "starts searching while you type
@@ -24,9 +22,35 @@ set shiftwidth=4                "Sets the number of spaces when indenting with '
 set autoindent                  "Sets new line with same indentation as current line
 set smartindent                 "Auto-indents for {
 let mapleader=" "               "Sets leader key
-hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
-highlight LineNr ctermfg=Yellow
-highlight CursorLineNr ctermfg=Yellow
+colorscheme peachpuff
+
+
+"Install the plugin manager vim-plug if it is not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"Plugins
+call plug#begin()
+Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'vim-syntastic/syntastic'
+call plug#end()
+
+"Sneak
+let g:sneak#label = 1
+
+"Fuzzy Finder (FZF)
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History:<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>L :Lines<CR>
 
 "Mappings
 inoremap lk <Esc>
@@ -34,19 +58,24 @@ vnoremap lk <Esc>
 nnoremap <leader>c mbI#<Esc>`b
 nnoremap <leader>u mb^x`b
 nnoremap <leader>v :vsplit<CR><C-w>w
-nnoremap <leader>b :b<Space>
 nnoremap <C-w> <C-w>w
 nnoremap <leader>q :q!<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>x :x<CR>
 nnoremap <leader>o mbo<Esc>`b
 nnoremap <leader>O mbO<Esc>`b
-nnoremap <leader>e :SyntasticCheck<CR>
-nnoremap <leader>t :ToggleSyntastic<CR>
+"nnoremap <leader>e :SyntasticCheck<CR>
+"nnoremap <leader>s :ToggleSyntastic<CR>
 inoremap ;; <C-n>
 nnoremap <leader>j J
-nnoremap J j
-nnoremap K k
+nnoremap J 3<C-e>
+nnoremap K 3<C-k>
+
+hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
+highlight LineNr ctermfg=Yellow
+highlight CursorLineNr ctermfg=Yellow
+highlight Normal ctermfg=White
+highlight Cursor ctermfg=Blue
 
 "Status bar
 set laststatus=2
@@ -68,13 +97,7 @@ hi statusline ctermbg=Blue ctermfg=0
 set statusline=%f%r%m%=%P
 
 
-call plug#begin()
-Plug 'tpope/vim-surround'
-Plug 'vim-syntastic/syntastic'
-Plug 'octol/vim-cpp-enhanced-highlight'
-call plug#end()
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-
-let g:syntastic_mode_map = { 'mode': 'passive' }
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"let g:syntastic_mode_map = { 'mode': 'passive' }
