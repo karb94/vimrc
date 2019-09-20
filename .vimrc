@@ -43,17 +43,37 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 "Sneak
+map <leader>f <Plug>Sneak_s
+map <leader>F <Plug>Sneak_S
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+unmap s
+
 let g:sneak#label = 1
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
+nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
+xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
+xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
+onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
+
+nnoremap <silent> t :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
+nnoremap <silent> T :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
+xnoremap <silent> t :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
+xnoremap <silent> T :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
+onoremap <silent> t :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+onoremap <silent> T :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 
 "Fuzzy Finder (FZF)
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :History:<CR>
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>/ :Lines<CR>
+nnoremap <C-r> :History:<CR>
+nnoremap <C-t> :Files<CR>
+nnoremap <leader>l :BLines<CR>
+
+"Quick Scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "Mappings
 inoremap lk <Esc>
@@ -72,7 +92,8 @@ nnoremap <leader>O mbO<Esc>`b
 inoremap ;; <C-n>
 nnoremap <leader>j J
 nnoremap J 3<C-e>
-nnoremap K 3<C-k>
+nnoremap K 3<C-y>
+nnoremap U :redo<CR>
 
 hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
 highlight LineNr ctermfg=Yellow
