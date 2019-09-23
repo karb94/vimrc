@@ -49,20 +49,21 @@ nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
 nmap t <Plug>Sneak_t
 nmap T <Plug>Sneak_T
+let g:sneak#target_labels = ";ftuvnqz/SFGHLTUNRMQZ"
 
 nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
 nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
 xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
 xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
-onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
-onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
+"onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+"onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 
-nnoremap <silent> t :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
-nnoremap <silent> T :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
-xnoremap <silent> t :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
-xnoremap <silent> T :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
-onoremap <silent> t :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
-onoremap <silent> T :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
+"nnoremap <silent> t :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
+"nnoremap <silent> T :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
+"xnoremap <silent> t :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
+"xnoremap <silent> T :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
+"onoremap <silent> t :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+"onoremap <silent> T :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 let g:sneak#label = 1
 
 "Fuzzy Finder (FZF)
@@ -70,8 +71,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <C-r> :History:<CR>
 nnoremap <C-t> :Files<CR>
 nnoremap <leader>l :BLines<CR>
-nnoremap <leader>gf :GFiles<CR>
-nnoremap <leader>l :BLines<CR>
+nnoremap <leader>g :Rg<CR>
 
 "Quick Scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -95,6 +95,8 @@ nnoremap <leader>j J
 nnoremap J 3<C-e>
 nnoremap K 3<C-y>
 nnoremap U :redo<CR>
+
+nmap <leader>m :!clear; make -C build/<CR>
 
 hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
 highlight LineNr ctermfg=Yellow
