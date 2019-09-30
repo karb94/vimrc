@@ -22,7 +22,6 @@ set shiftwidth=4                "Sets the number of spaces when indenting with '
 set autoindent                  "Sets new line with same indentation as current line
 set smartindent                 "Auto-indents for {
 let mapleader=" "               "Sets leader key
-colorscheme peachpuff
 
 
 "Install the plugin manager vim-plug if it is not installed
@@ -39,6 +38,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'SirVer/ultisnips'
 "Plug 'vim-syntastic/syntastic'
 call plug#end()
 
@@ -78,6 +79,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "Mappings
 inoremap lk <Esc>
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
 vnoremap lk <Esc>
 nnoremap <leader>c mbI#<Esc>`b
 nnoremap <leader>u mb^x`b
@@ -88,6 +91,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>x :x<CR>
 nnoremap <leader>o mbo<Esc>`b
 nnoremap <leader>O mbO<Esc>`b
+nnoremap <leader>rc :source $MYVIMRC<CR>
 "nnoremap <leader>e :SyntasticCheck<CR>
 "nnoremap <leader>s :ToggleSyntastic<CR>
 inoremap ;; <C-n>
@@ -98,28 +102,32 @@ nnoremap U :redo<CR>
 
 nmap <leader>m :!clear; make -C build/<CR>
 
-hi SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
+colorscheme peachpuff
+highlight SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
 highlight LineNr ctermfg=Yellow
 highlight CursorLineNr ctermfg=Yellow
 highlight Normal ctermfg=White
+highlight Visual ctermbg=Black ctermfg=202
+highlight incsearch ctermbg=Black ctermfg=202
+highlight Pmenu ctermbg=233 ctermfg=White
+highlight PmenuSel ctermbg=18 ctermfg=White
 
 "Status bar
 set laststatus=2
 function! InsertStatuslineColor(mode)
   if a:mode == 'i'
     hi statusline ctermbg=Yellow ctermfg=0
-  elseif a:mode == 'v'
-    hi statusline ctermbg=166  ctermfg=0
   elseif a:mode == 'r'
     hi statusline ctermbg=Red  ctermfg=0
   endif
 endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline  ctermbg=Blue ctermfg=0
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi statusline  ctermbg=21 ctermfg=240
 
 " default the statusline to green when entering Vim
-hi statusline ctermbg=Blue ctermfg=0
+hi statusline ctermbg=21 ctermfg=240
 set statusline=%f%r%m%=%P
 
 
