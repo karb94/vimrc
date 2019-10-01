@@ -3,6 +3,7 @@ filetype plugin on
 syntax on
 syntax enable
 
+
 "Settings
 let &t_SI.="\e[6 q"             "Change cursor shape in insert mode
 let &t_SR.="\e[4 q"             "Change cursor shape in replace mode
@@ -40,7 +41,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 Plug 'SirVer/ultisnips'
-"Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 "Sneak
@@ -56,15 +56,6 @@ nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
 nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
 xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
 xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
-"onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
-"onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
-
-"nnoremap <silent> t :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
-"nnoremap <silent> T :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
-"xnoremap <silent> t :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
-"xnoremap <silent> T :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
-"onoremap <silent> t :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
-"onoremap <silent> T :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 let g:sneak#label = 1
 
 "Fuzzy Finder (FZF)
@@ -74,8 +65,19 @@ nnoremap <C-t> :Files<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>g :Rg<CR>
 
-"Quick Scope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"" YouCompleteMe
+let g:ycm_key_list_select_completion=['<C-n>','<Tab>']
+let g:ycm_key_list_previous_completion=['<C-p>','<S-Tab>']
+let g:ycm_max_num_identifier_candidates = 5
+let g:ycm_max_num_candidates = 5
+
+"" Ultisnips
+"Stupid workaround
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="**"
+let g:UltiSnipsJumpForwardTrigger="<C-n>"
+let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+let g:UltiSnipsEditSplit="vertical"
 
 "Mappings
 inoremap lk <Esc>
@@ -91,10 +93,10 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>x :x<CR>
 nnoremap <leader>o mbo<Esc>`b
 nnoremap <leader>O mbO<Esc>`b
+nnoremap <silent><leader>o :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <leader>p :put<CR>
 nnoremap <leader>rc :source $MYVIMRC<CR>
-"nnoremap <leader>e :SyntasticCheck<CR>
-"nnoremap <leader>s :ToggleSyntastic<CR>
-inoremap ;; <C-n>
 nnoremap <leader>j J
 nnoremap J 3<C-e>
 nnoremap K 3<C-y>
@@ -102,6 +104,7 @@ nnoremap U :redo<CR>
 
 nmap <leader>m :!clear; make -C build/<CR>
 
+"Color
 colorscheme peachpuff
 highlight SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
 highlight LineNr ctermfg=Yellow
@@ -111,6 +114,8 @@ highlight Visual ctermbg=Black ctermfg=202
 highlight incsearch ctermbg=Black ctermfg=202
 highlight Pmenu ctermbg=233 ctermfg=White
 highlight PmenuSel ctermbg=18 ctermfg=White
+highlight MatchParen ctermbg=Black ctermfg=202
+highlight Comment ctermbg=Black ctermfg=202
 
 "Status bar
 set laststatus=2
