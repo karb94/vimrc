@@ -22,6 +22,7 @@ set timeoutlen=500              "Time waited for mappings
 set shiftwidth=4                "Sets the number of spaces when indenting with '>>'
 set autoindent                  "Sets new line with same indentation as current line
 set smartindent                 "Auto-indents for {
+set signcolumn=yes
 let mapleader=" "               "Sets leader key
 
 
@@ -39,7 +40,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
+Plug 'ycm-core/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --clang-completer >> logfile' }
 Plug 'SirVer/ultisnips'
 call plug#end()
 
@@ -68,7 +69,7 @@ nnoremap <leader>g :Rg<CR>
 "" YouCompleteMe
 let g:ycm_key_list_select_completion=['<C-n>','<Tab>']
 let g:ycm_key_list_previous_completion=['<C-p>','<S-Tab>']
-let g:ycm_max_num_identifier_candidates = 5
+let g:ycm_max_num_identifier_candidates = 3
 let g:ycm_max_num_candidates = 5
 
 "" Ultisnips
@@ -106,7 +107,7 @@ nmap <leader>m :!clear; make -C build/<CR>
 
 "Color
 colorscheme peachpuff
-highlight SpellBad cterm=bold,italic,underline  ctermfg=000 ctermbg=Red
+highlight SpellBad cterm=underline ctermfg=9 ctermbg=0
 highlight LineNr ctermfg=Yellow
 highlight CursorLineNr ctermfg=Yellow
 highlight Normal ctermfg=White
@@ -116,6 +117,8 @@ highlight Pmenu ctermbg=233 ctermfg=White
 highlight PmenuSel ctermbg=18 ctermfg=White
 highlight MatchParen ctermbg=Black ctermfg=202
 highlight Comment ctermbg=Black ctermfg=202
+highlight SignColumn ctermbg=Black
+highlight Error ctermbg=Black ctermfg=Red
 
 "Status bar
 set laststatus=2
@@ -129,14 +132,8 @@ endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline  ctermbg=21 ctermfg=240
+au InsertLeave * hi statusline  ctermbg=21 ctermfg=Black
 
 " default the statusline to green when entering Vim
-hi statusline ctermbg=21 ctermfg=240
+hi statusline ctermbg=21 ctermfg=Black
 set statusline=%f%r%m%=%P
-
-
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"let g:syntastic_mode_map = { 'mode': 'passive' }
