@@ -18,7 +18,8 @@ set expandtab                   "Converts tabs into spaces
 set path+=**                    "You can search for any file in any subdirectory (as long as you enter the exact name)
 set wildmenu                    "It opens a horizontal menu where you cycle with <Tab> and <S-Tab>
 set wildmode=longest:full,full  "Will complete to the longest common command
-set timeoutlen=500              "Time waited for mappings
+autocmd InsertEnter * set timeoutlen=100    "Time waited for mappings
+autocmd InsertLeave * set timeoutlen=600    "Time waited for mappings
 set shiftwidth=4                "Sets the number of spaces when indenting with '>>'
 set autoindent                  "Sets new line with same indentation as current line
 set smartindent                 "Auto-indents for {
@@ -33,6 +34,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+call has('python3')
 "Plugins
 call plug#begin()
 Plug 'tpope/vim-surround'
@@ -107,7 +109,7 @@ nmap <leader>m :!clear; make -C build/<CR>
 
 "Color
 colorscheme peachpuff
-highlight SpellBad cterm=underline ctermfg=9 ctermbg=0
+highlight SpellBad cterm=bold ctermfg=9 ctermbg=0
 highlight LineNr ctermfg=Yellow
 highlight CursorLineNr ctermfg=Yellow
 highlight Normal ctermfg=White
